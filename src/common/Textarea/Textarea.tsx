@@ -1,12 +1,18 @@
 import React from 'react';
 import clsx from 'clsx';
 
-function Textarea({
-	labelText = '',
+interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+	placeholderText: string;
+	labelText?: string;
+	className?: string;
+}
+
+const Textarea: React.FC<Props> = ({
 	placeholderText,
 	onChange,
+	labelText = '',
 	className = '',
-}) {
+}) => {
 	return (
 		<div className='form-control w-full'>
 			{labelText ? (
@@ -14,6 +20,7 @@ function Textarea({
 					<span className='label-text'>{labelText}</span>
 				</label>
 			) : null}
+
 			<textarea
 				placeholder={placeholderText}
 				className={clsx('textarea-primary textarea p-5', className)}
@@ -21,6 +28,6 @@ function Textarea({
 			></textarea>
 		</div>
 	);
-}
+};
 
 export default Textarea;

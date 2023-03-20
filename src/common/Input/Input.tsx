@@ -1,32 +1,39 @@
 import React from 'react';
 import clsx from 'clsx';
 
-function Input({
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+	placeholderText: string;
+	labelText?: string;
+	className?: string;
+}
+
+const Input: React.FC<Props> = ({
 	value,
 	onChange,
-	labelText = '',
 	placeholderText,
-	className = '',
+	className,
+	labelText = '',
 	type = 'text',
 	...rest
-}) {
+}) => {
 	return (
 		<div className='form-control w-full'>
 			{labelText ? (
-				<label className='label'>
+				<label className='label text-xs font-medium text-gray-700'>
 					<span className='label-text'>{labelText}</span>
 				</label>
 			) : null}
+
 			<input
 				type={type}
 				value={value}
 				placeholder={placeholderText}
-				className={clsx('input-primary input input-sm', className)}
+				className={clsx('input-primary input input-md', className)}
 				onChange={onChange}
 				{...rest}
 			/>
 		</div>
 	);
-}
+};
 
 export default Input;

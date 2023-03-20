@@ -1,17 +1,22 @@
 import React from 'react';
 
 import { Button } from 'common';
-import {
-	mockedAuthorsList,
-	SHOW_COURSE_BUTTON_TEXT,
-} from '../../../../constants';
+import { AuthorsList, Course } from 'types';
+import { SHOW_COURSE_BUTTON_TEXT } from '../../../../constants';
 
 import { pipeDuration, dateGenerator } from 'helpers';
 
-const getAuthorName = (authorId) =>
-	mockedAuthorsList.find(({ id }) => id === authorId)?.name;
+interface Props {
+	data: Course;
+	authorsList: AuthorsList;
+}
 
-function CourseCard({ title, description, authors, duration, creationDate }) {
+const CourseCard: React.FC<Props> = ({ data, authorsList }) => {
+	const { title, description, authors, duration, creationDate } = data;
+
+	const getAuthorName = (authorId) =>
+		authorsList.find(({ id }) => id === authorId)?.name;
+
 	const authorsNames = authors.map((author) => getAuthorName(author));
 
 	return (
@@ -44,6 +49,6 @@ function CourseCard({ title, description, authors, duration, creationDate }) {
 			</div>
 		</div>
 	);
-}
+};
 
 export default CourseCard;

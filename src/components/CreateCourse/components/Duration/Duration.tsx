@@ -7,14 +7,19 @@ import {
 	DURATION_INPUT_PLACEHOLDER,
 } from '../../../../constants';
 
-function Duration({ durationValue, handleDurationChange }) {
+interface Props {
+	durationValue: number;
+	handleDurationChange: (event: any) => void;
+}
+
+const Duration: React.FC<Props> = ({ durationValue, handleDurationChange }) => {
 	return (
 		<div className='flex flex-col space-y-2'>
 			<h3 className='self-center font-semibold'>Duration</h3>
 			<Input
 				labelText={DURATION_INPUT_LABEL}
 				placeholderText={DURATION_INPUT_PLACEHOLDER}
-				className='w-full'
+				className='input-sm w-full'
 				value={durationValue}
 				onChange={handleDurationChange}
 				type='number'
@@ -28,6 +33,6 @@ function Duration({ durationValue, handleDurationChange }) {
 			</h4>
 		</div>
 	);
-}
+};
 
 export default Duration;

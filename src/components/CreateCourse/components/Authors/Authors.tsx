@@ -1,17 +1,24 @@
 import React from 'react';
 
 import { Button } from 'common';
+import { ADD_AUTHOR_BUTTON_TEXT } from '../../../../constants';
+import { Author, AuthorsList } from 'types';
 
-function Authors({ authors, onClick }) {
+interface Props {
+	authors: AuthorsList;
+	onClick: (author: Author) => void;
+}
+
+const Authors: React.FC<Props> = ({ authors, onClick }) => {
 	return (
 		<div className='flex flex-col justify-end space-y-4'>
 			<h3 className='self-center font-semibold'>Authors</h3>
 
 			{authors.map((author) => (
-				<div className='flex flex-row' key={author.id}>
+				<div className='flex flex-row justify-evenly' key={author.id}>
 					<p className='basis-1/2'>{author.name}</p>
 					<Button
-						buttonText='Add author'
+						buttonText={ADD_AUTHOR_BUTTON_TEXT}
 						className='btn-outline'
 						onClick={() => onClick(author)}
 					/>
@@ -19,6 +26,6 @@ function Authors({ authors, onClick }) {
 			))}
 		</div>
 	);
-}
+};
 
 export default Authors;

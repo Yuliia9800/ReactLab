@@ -9,7 +9,11 @@ import {
 	mockedAuthorsList,
 } from '../../../../constants';
 
-function AddAuthor({ createAuthor }) {
+interface Props {
+	createAuthor: (event: any) => void;
+}
+
+const AddAuthor: React.FC<Props> = ({ createAuthor }) => {
 	const [authorName, setAuthorName] = useState('');
 
 	const handleCreateAuthor = () => {
@@ -31,7 +35,7 @@ function AddAuthor({ createAuthor }) {
 			<Input
 				labelText={AUTHOR_NAME_INPUT_LABEL}
 				placeholderText={AUTHOR_NAME_INPUT_PLACEHOLDER}
-				className='w-full'
+				className='input-sm w-full'
 				value={authorName}
 				onChange={(e) => setAuthorName(e.target.value)}
 			/>
@@ -42,6 +46,6 @@ function AddAuthor({ createAuthor }) {
 			/>
 		</div>
 	);
-}
+};
 
 export default AddAuthor;

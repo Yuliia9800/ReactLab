@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 
 import { Input, Button } from 'common';
+import { CoursesList } from 'types';
 import {
 	SEARCH_BUTTON_TEXT,
 	SEARCH_INPUT_PLACEHOLDER,
 } from '../../../../constants';
 
-function SearchBar({ setFilteredCourses, coursesList }) {
+interface Props {
+	coursesList: CoursesList;
+	setFilteredCourses: (value: CoursesList) => void;
+}
+
+const SearchBar: React.FC<Props> = ({ setFilteredCourses, coursesList }) => {
 	const [inputValue, setInputValue] = useState('');
 
 	const handleInputChange = (event) => {
@@ -27,13 +33,13 @@ function SearchBar({ setFilteredCourses, coursesList }) {
 		<div className='flex space-x-3'>
 			<Input
 				placeholderText={SEARCH_INPUT_PLACEHOLDER}
-				className='w-72'
+				className='input-sm w-72'
 				value={inputValue}
 				onChange={handleInputChange}
 			/>
 			<Button buttonText={SEARCH_BUTTON_TEXT} onClick={handleButtonClick} />
 		</div>
 	);
-}
+};
 
 export default SearchBar;
