@@ -4,4 +4,3 @@ export { default as CreateCourse } from './CreateCourse/CreateCourse';
 export { default as Login } from './Login/Login';
 export { default as Registration } from './Registration/Registration';
 export { default as CourseInfo } from './CourseInfo/CourseInfo';
-export { default as Root } from './Root/Root';

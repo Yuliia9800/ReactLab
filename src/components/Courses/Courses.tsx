@@ -3,17 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from 'common';
 import { CourseCard, SearchBar } from './components';
-import {
-	ADD_NEW_COURSE_BUTTON_TEXT,
-	mockedAuthorsList,
-	mockedCoursesList,
-} from '../../constants';
-import { AuthorsList, CoursesList } from 'types';
+import { ADD_NEW_COURSE_BUTTON_TEXT, mockedCoursesList } from '../../constants';
+import { CoursesList } from 'types';
 
 const Courses: React.FC = () => {
 	const [coursesList] = useState<CoursesList>(mockedCoursesList);
 	const [filteredCourses, setFilteredCourses] = useState<CoursesList>([]);
-	const [authorsList] = useState<AuthorsList>(mockedAuthorsList);
 	const navigate = useNavigate();
 
 	const courses = filteredCourses.length ? filteredCourses : coursesList;
@@ -33,11 +28,7 @@ const Courses: React.FC = () => {
 			</div>
 
 			{courses.map((courseData) => (
-				<CourseCard
-					key={courseData.id}
-					data={courseData}
-					authorsList={authorsList}
-				/>
+				<CourseCard key={courseData.id} data={courseData} />
 			))}
 		</div>
 	);

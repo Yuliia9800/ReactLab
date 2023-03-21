@@ -1,23 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from 'common';
-import { AuthorsList, Course } from 'types';
+import { pipeDuration, dateGenerator, getAuthorsNames } from 'helpers';
+import { Course } from 'types';
 import { SHOW_COURSE_BUTTON_TEXT } from '../../../../constants';
-
-import { pipeDuration, dateGenerator } from 'helpers';
 
 interface Props {
 	data: Course;
-	authorsList: AuthorsList;
 }
 
-const CourseCard: React.FC<Props> = ({ data, authorsList }) => {
-	const { title, description, authors, duration, creationDate } = data;
+const CourseCard: React.FC<Props> = ({ data }) => {
+	const navigate = useNavigate();
+	const { id, title, description, authors, duration, creationDate } = data;
 
-	const getAuthorName = (authorId) =>
-		authorsList.find(({ id }) => id === authorId)?.name;
-
-	const authorsNames = authors.map((author) => getAuthorName(author));
+	const handleButtonClick = () => {
+		navigate(`/courses/${id}`);
+	};
 
 	return (
 		<div className='card flex min-h-[200px] flex-row justify-between gap-10 bg-base-200 p-5 shadow-xl'>
@@ -30,7 +29,7 @@ const CourseCard: React.FC<Props> = ({ data, authorsList }) => {
 				<div className=' space-y-2'>
 					<p className='truncate text-sm'>
 						<b>Author: </b>
-						{authorsNames.join(', ')}
+						{getAuthorsNames(authors).join(', ')}
 					</p>
 					<p className='text-sm'>
 						<b>Duration: </b>
@@ -43,7 +42,7 @@ const CourseCard: React.FC<Props> = ({ data, authorsList }) => {
 				</div>
 				<Button
 					buttonText={SHOW_COURSE_BUTTON_TEXT}
-					onClick={() => console.log(SHOW_COURSE_BUTTON_TEXT)}
+					onClick={handleButtonClick}
 					className='btn-default btn-block self-center'
 				/>
 			</div>
