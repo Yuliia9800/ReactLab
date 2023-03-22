@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Courses, Header, CreateCourse } from 'components';
-import { mockedCoursesList } from './constants';
+import { mockedCoursesList } from 'constants/mockedData';
 
 function App() {
 	const [coursesList, setCoursesList] = useState(mockedCoursesList);

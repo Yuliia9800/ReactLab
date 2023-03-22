@@ -1,15 +1,8 @@
 import React from 'react';
 
 import { Button } from 'common';
-import {
-	mockedAuthorsList,
-	SHOW_COURSE_BUTTON_TEXT,
-} from '../../../../constants';
-
-import { pipeDuration, dateGenerator } from 'helpers';
-
-const getAuthorName = (authorId) =>
-	mockedAuthorsList.find(({ id }) => id === authorId)?.name;
+import { pipeDuration, dateGenerator, getAuthorName } from 'helpers';
+import { SHOW_COURSE_BUTTON_TEXT } from 'constants/constants';
 
 function CourseCard({ title, description, authors, duration, creationDate }) {
 	const authorsNames = authors.map((author) => getAuthorName(author));

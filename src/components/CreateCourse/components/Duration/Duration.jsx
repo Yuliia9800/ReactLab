@@ -5,7 +5,7 @@ import { pipeDuration } from 'helpers';
 import {
 	DURATION_INPUT_LABEL,
 	DURATION_INPUT_PLACEHOLDER,
-} from '../../../../constants';
+} from 'constants/constants';
 
 function Duration({ durationValue, handleDurationChange }) {
 	return (

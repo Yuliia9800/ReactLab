@@ -7,10 +7,10 @@ import {
 	CREATE_COURSE_BUTTON_TEXT,
 	DESCRIPTION_INPUT_LABEL,
 	DESCRIPTION_INPUT_PLACEHOLDER,
-	mockedAuthorsList,
 	TITLE_INPUT_LABEL,
 	TITLE_INPUT_PLACEHOLDER,
-} from '../../constants';
+} from 'constants/constants';
+import { mockedAuthorsList } from 'constants/mockedData';
 
 function CreateCourse({ handleAddCourse }) {
 	const [authors, setAuthors] = useState(mockedAuthorsList);

@@ -6,8 +6,8 @@ import {
 	ADD_AUTHOR_BUTTON_TEXT,
 	AUTHOR_NAME_INPUT_LABEL,
 	AUTHOR_NAME_INPUT_PLACEHOLDER,
-	mockedAuthorsList,
-} from '../../../../constants';
+} from 'constants/constants';
+import { mockedAuthorsList } from 'constants/mockedData';
 
 function AddAuthor({ createAuthor }) {
 	const [authorName, setAuthorName] = useState('');

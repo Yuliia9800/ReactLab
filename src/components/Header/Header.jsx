@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button } from 'common';
-import { LOGOUT_BUTTON_TEXT } from '../../constants';
+import { LOGOUT_BUTTON_TEXT } from 'constants/constants';
 import Logo from './components/Logo/Logo';
 
 function Header() {

@@ -4,9 +4,9 @@ import { Input, Button } from 'common';
 import {
 	SEARCH_BUTTON_TEXT,
 	SEARCH_INPUT_PLACEHOLDER,
-} from '../../../../constants';
+} from 'constants/constants';
 
-function SearchBar({ setFilteredCourses, coursesList }) {
+function SearchBar({ setSearch }) {
 	const [inputValue, setInputValue] = useState('');
 
 	const handleInputChange = (event) => {
@@ -14,13 +14,7 @@ function SearchBar({ setFilteredCourses, coursesList }) {
 	};
 
 	const handleButtonClick = () => {
-		const filteredCourses = coursesList.filter(
-			(course) =>
-				course.id.toLowerCase().includes(inputValue.toLowerCase()) ||
-				course.title.toLowerCase().includes(inputValue.toLowerCase())
-		);
-
-		setFilteredCourses(filteredCourses);
+		setSearch(inputValue);
 	};
 
 	return (

@@ -2,20 +2,21 @@ import React, { useState } from 'react';
 
 import { Button } from 'common';
 import { CourseCard, SearchBar } from './components';
-import { ADD_NEW_COURSE_BUTTON_TEXT } from '../../constants';
+import { ADD_NEW_COURSE_BUTTON_TEXT } from 'constants/constants';
 
 function Courses({ coursesList, navigateToCreate }) {
-	const [filteredCourses, setFilteredCourses] = useState([]);
+	const [search, setSearch] = useState('');
 
-	const courses = filteredCourses.length ? filteredCourses : coursesList;
+	const courses = coursesList.filter(
+		(course) =>
+			course.id.toLowerCase().includes(search.toLowerCase()) ||
+			course.title.toLowerCase().includes(search.toLowerCase())
+	);
 
 	return (
 		<div className='flex flex-col justify-between space-y-5 p-5'>
 			<div className='flex justify-between'>
-				<SearchBar
-					coursesList={coursesList}
-					setFilteredCourses={setFilteredCourses}
-				/>
+				<SearchBar setSearch={setSearch} />
 				<Button
 					buttonText={ADD_NEW_COURSE_BUTTON_TEXT}
 					className='btn-secondary'
@@ -24,7 +25,14 @@ function Courses({ coursesList, navigateToCreate }) {
 			</div>
 
 			{courses.map((courseData) => (
-				<CourseCard key={courseData.id} {...courseData} />
+				<CourseCard
+					key={courseData.id}
+					title={courseData.title}
+					description={courseData.description}
+					creationDate={courseData.creationDate}
+					authors={courseData.authors}
+					duration={courseData.duration}
+				/>
 			))}
 		</div>
 	);
