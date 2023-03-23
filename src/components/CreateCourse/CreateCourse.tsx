@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Button, Input, Textarea } from 'common';
@@ -7,12 +8,14 @@ import {
 	CREATE_COURSE_BUTTON_TEXT,
 	DESCRIPTION_INPUT_LABEL,
 	DESCRIPTION_INPUT_PLACEHOLDER,
+	mockedAuthorsList,
+	mockedCoursesList,
 	TITLE_INPUT_LABEL,
 	TITLE_INPUT_PLACEHOLDER,
-} from 'constants/constants';
-import { mockedAuthorsList } from 'constants/mockedData';
+} from 'constant';
 
-function CreateCourse({ handleAddCourse }) {
+function CreateCourse() {
+	const navigate = useNavigate();
 	const [authors, setAuthors] = useState(mockedAuthorsList);
 	const [courseAuthors, setCourseAuthors] = useState([]);
 	const [titleValue, setTitleValue] = useState('');
@@ -66,7 +69,8 @@ function CreateCourse({ handleAddCourse }) {
 			authors: courseAuthors.map(({ id }) => id),
 		};
 
-		handleAddCourse(newCourse);
+		mockedCoursesList.push(newCourse);
+		navigate('/courses');
 	};
 
 	return (
@@ -76,7 +80,7 @@ function CreateCourse({ handleAddCourse }) {
 					<Input
 						labelText={TITLE_INPUT_LABEL}
 						placeholderText={TITLE_INPUT_PLACEHOLDER}
-						className='w-72'
+						className='input-sm max-w-sm'
 						value={titleValue}
 						onChange={handleTitleChange}
 					/>

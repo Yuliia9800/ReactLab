@@ -1,3 +1,4 @@
 export * from './dateGenerator';
 export * from './pipeDuration';
-export * from './getAuthorName';
+export * from './getAuthorsNames';
+export * from './api';

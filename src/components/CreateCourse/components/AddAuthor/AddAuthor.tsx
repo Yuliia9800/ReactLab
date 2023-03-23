@@ -6,10 +6,14 @@ import {
 	ADD_AUTHOR_BUTTON_TEXT,
 	AUTHOR_NAME_INPUT_LABEL,
 	AUTHOR_NAME_INPUT_PLACEHOLDER,
-} from 'constants/constants';
-import { mockedAuthorsList } from 'constants/mockedData';
+	mockedAuthorsList,
+} from 'constant';
 
-function AddAuthor({ createAuthor }) {
+interface AddAuthorProps {
+	createAuthor: (event: any) => void;
+}
+
+function AddAuthor({ createAuthor }: AddAuthorProps) {
 	const [authorName, setAuthorName] = useState('');
 
 	const handleCreateAuthor = () => {
@@ -31,7 +35,7 @@ function AddAuthor({ createAuthor }) {
 			<Input
 				labelText={AUTHOR_NAME_INPUT_LABEL}
 				placeholderText={AUTHOR_NAME_INPUT_PLACEHOLDER}
-				className='w-full'
+				className='input-sm w-full'
 				value={authorName}
 				onChange={(e) => setAuthorName(e.target.value)}
 			/>

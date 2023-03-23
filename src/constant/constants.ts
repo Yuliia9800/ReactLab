@@ -20,5 +20,3 @@ export const SHOW_COURSE_BUTTON_TEXT = 'Show Course';
 export const CREATE_AUTHOR_BUTTON_TEXT = 'Create Author';
 export const ADD_AUTHOR_BUTTON_TEXT = 'Add Author';
 export const DELETE_AUTHOR_BUTTON_TEXT = 'Delete Author';
-
-export const test = () => null;

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
 import { Input, Button } from 'common';
-import {
-	SEARCH_BUTTON_TEXT,
-	SEARCH_INPUT_PLACEHOLDER,
-} from 'constants/constants';
+import { SEARCH_BUTTON_TEXT, SEARCH_INPUT_PLACEHOLDER } from 'constant';
 
-function SearchBar({ setSearch }) {
+interface SearchBarProps {
+	setSearch: (value: string) => void;
+}
+
+function SearchBar({ setSearch }: SearchBarProps) {
 	const [inputValue, setInputValue] = useState('');
 
 	const handleInputChange = (event) => {
@@ -21,7 +22,7 @@ function SearchBar({ setSearch }) {
 		<div className='flex space-x-3'>
 			<Input
 				placeholderText={SEARCH_INPUT_PLACEHOLDER}
-				className='w-72'
+				className='input-sm w-72'
 				value={inputValue}
 				onChange={handleInputChange}
 			/>

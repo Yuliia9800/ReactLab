@@ -1,11 +1,26 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from 'common';
-import { pipeDuration, dateGenerator, getAuthorName } from 'helpers';
-import { SHOW_COURSE_BUTTON_TEXT } from 'constants/constants';
+import { pipeDuration, dateGenerator, getAuthorsNames } from 'helpers';
+import { Course } from 'types';
+import { SHOW_COURSE_BUTTON_TEXT } from 'constant';
 
-function CourseCard({ title, description, authors, duration, creationDate }) {
-	const authorsNames = authors.map((author) => getAuthorName(author));
+interface CourseCardProps extends Course {}
+
+function CourseCard({
+	id,
+	title,
+	description,
+	authors,
+	duration,
+	creationDate,
+}: CourseCardProps) {
+	const navigate = useNavigate();
+
+	const handleButtonClick = () => {
+		navigate(`/courses/${id}`);
+	};
 
 	return (
 		<div className='card flex min-h-[200px] flex-row justify-between gap-10 bg-base-200 p-5 shadow-xl'>
@@ -18,7 +33,7 @@ function CourseCard({ title, description, authors, duration, creationDate }) {
 				<div className=' space-y-2'>
 					<p className='truncate text-sm'>
 						<b>Author: </b>
-						{authorsNames.join(', ')}
+						{getAuthorsNames(authors).join(', ')}
 					</p>
 					<p className='text-sm'>
 						<b>Duration: </b>
@@ -31,7 +46,7 @@ function CourseCard({ title, description, authors, duration, creationDate }) {
 				</div>
 				<Button
 					buttonText={SHOW_COURSE_BUTTON_TEXT}
-					onClick={() => console.log(SHOW_COURSE_BUTTON_TEXT)}
+					onClick={handleButtonClick}
 					className='btn-default btn-block self-center'
 				/>
 			</div>

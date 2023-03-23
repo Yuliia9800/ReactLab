@@ -1,9 +1,15 @@
 import React from 'react';
 
 import { Button } from 'common';
-import { DELETE_AUTHOR_BUTTON_TEXT } from '../../../../constants';
+import { AuthorsList, Author } from 'types';
+import { DELETE_AUTHOR_BUTTON_TEXT } from 'constant';
 
-function CourseAuthor({ authors, onClick }) {
+interface CourseAuthorProps {
+	authors: AuthorsList;
+	onClick: (author: Author) => void;
+}
+
+function CourseAuthor({ authors, onClick }: CourseAuthorProps) {
 	return (
 		<div className='flex flex-col justify-end space-y-4'>
 			<h3 className='self-center font-semibold'>Course authors</h3>
@@ -12,7 +18,7 @@ function CourseAuthor({ authors, onClick }) {
 				<p className='self-center text-sm font-light'>Author list is empty</p>
 			) : (
 				authors.map((author) => (
-					<div className='flex flex-row' key={author.id}>
+					<div className='flex flex-row justify-evenly' key={author.id}>
 						<p className='basis-1/2'>{author.name}</p>
 						<Button
 							buttonText={DELETE_AUTHOR_BUTTON_TEXT}
