@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { Input, Button } from 'common';
 import { SEARCH_BUTTON_TEXT, SEARCH_INPUT_PLACEHOLDER } from 'constant';
 
-interface Props {
+interface SearchBarProps {
 	setSearch: (value: string) => void;
 }
 
-const SearchBar: React.FC<Props> = ({ setSearch }) => {
+function SearchBar({ setSearch }: SearchBarProps) {
 	const [inputValue, setInputValue] = useState('');
 
 	const handleInputChange = (event) => {
@@ -29,6 +29,6 @@ const SearchBar: React.FC<Props> = ({ setSearch }) => {
 			<Button buttonText={SEARCH_BUTTON_TEXT} onClick={handleButtonClick} />
 		</div>
 	);
-};
+}
 
 export default SearchBar;

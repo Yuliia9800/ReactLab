@@ -6,7 +6,7 @@ import { CoursesList } from 'types';
 import { mockedCoursesList, ADD_NEW_COURSE_BUTTON_TEXT } from 'constant';
 import { CourseCard, SearchBar } from './components';
 
-const Courses: React.FC = () => {
+function Courses() {
 	const navigate = useNavigate();
 	const [coursesList] = useState<CoursesList>(mockedCoursesList);
 	const [search, setSearch] = useState('');
@@ -47,6 +47,6 @@ const Courses: React.FC = () => {
 			)}
 		</div>
 	);
-};
+}
 
 export default Courses;

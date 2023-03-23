@@ -4,12 +4,12 @@ import { Button } from 'common';
 import { AuthorsList, Author } from 'types';
 import { DELETE_AUTHOR_BUTTON_TEXT } from 'constant';
 
-interface Props {
+interface CourseAuthorProps {
 	authors: AuthorsList;
 	onClick: (author: Author) => void;
 }
 
-const CourseAuthor: React.FC<Props> = ({ authors, onClick }) => {
+function CourseAuthor({ authors, onClick }: CourseAuthorProps) {
 	return (
 		<div className='flex flex-col justify-end space-y-4'>
 			<h3 className='self-center font-semibold'>Course authors</h3>
@@ -30,6 +30,6 @@ const CourseAuthor: React.FC<Props> = ({ authors, onClick }) => {
 			)}
 		</div>
 	);
-};
+}
 
 export default CourseAuthor;

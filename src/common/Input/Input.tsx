@@ -1,13 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	placeholderText: string;
 	labelText?: string;
 	className?: string;
 }
 
-const Input: React.FC<Props> = ({
+function Input({
 	value,
 	onChange,
 	placeholderText,
@@ -15,7 +15,7 @@ const Input: React.FC<Props> = ({
 	labelText = '',
 	type = 'text',
 	...rest
-}) => {
+}: InputProps) {
 	return (
 		<div className='form-control w-full'>
 			{labelText ? (
@@ -34,6 +34,6 @@ const Input: React.FC<Props> = ({
 			/>
 		</div>
 	);
-};
+}
 
 export default Input;

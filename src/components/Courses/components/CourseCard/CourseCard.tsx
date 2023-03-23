@@ -6,16 +6,16 @@ import { pipeDuration, dateGenerator, getAuthorsNames } from 'helpers';
 import { Course } from 'types';
 import { SHOW_COURSE_BUTTON_TEXT } from 'constant';
 
-interface Props extends Course {}
+interface CourseCardProps extends Course {}
 
-const CourseCard: React.FC<Props> = ({
+function CourseCard({
 	id,
 	title,
 	description,
 	authors,
 	duration,
 	creationDate,
-}) => {
+}: CourseCardProps) {
 	const navigate = useNavigate();
 
 	const handleButtonClick = () => {
@@ -52,6 +52,6 @@ const CourseCard: React.FC<Props> = ({
 			</div>
 		</div>
 	);
-};
+}
 
 export default CourseCard;

@@ -14,7 +14,7 @@ import {
 	TITLE_INPUT_PLACEHOLDER,
 } from 'constant';
 
-const CreateCourse: React.FC = () => {
+function CreateCourse() {
 	const navigate = useNavigate();
 	const [authors, setAuthors] = useState(mockedAuthorsList);
 	const [courseAuthors, setCourseAuthors] = useState([]);
@@ -117,6 +117,6 @@ const CreateCourse: React.FC = () => {
 			</div>
 		</>
 	);
-};
+}
 
 export default CreateCourse;

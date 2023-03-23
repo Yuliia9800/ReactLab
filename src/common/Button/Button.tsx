@@ -1,16 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	buttonText: string;
 }
 
-const Button: React.FC<Props> = ({
-	className,
-	onClick,
-	buttonText,
-	...rest
-}) => {
+function Button({ className, onClick, buttonText, ...rest }: ButtonProps) {
 	return (
 		<button
 			onClick={onClick}
@@ -21,6 +16,6 @@ const Button: React.FC<Props> = ({
 			{buttonText}
 		</button>
 	);
-};
+}
 
 export default Button;

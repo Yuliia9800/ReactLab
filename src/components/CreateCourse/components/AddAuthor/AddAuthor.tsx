@@ -9,11 +9,11 @@ import {
 	mockedAuthorsList,
 } from 'constant';
 
-interface Props {
+interface AddAuthorProps {
 	createAuthor: (event: any) => void;
 }
 
-const AddAuthor: React.FC<Props> = ({ createAuthor }) => {
+function AddAuthor({ createAuthor }: AddAuthorProps) {
 	const [authorName, setAuthorName] = useState('');
 
 	const handleCreateAuthor = () => {
@@ -46,6 +46,6 @@ const AddAuthor: React.FC<Props> = ({ createAuthor }) => {
 			/>
 		</div>
 	);
-};
+}
 
 export default AddAuthor;
