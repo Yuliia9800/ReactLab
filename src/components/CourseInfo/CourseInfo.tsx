@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { dateGenerator, getAuthorsNames, pipeDuration } from 'helpers';
-import { mockedCoursesList } from '../../constants';
+import { mockedCoursesList } from 'constant';
 
 function CourseInfo() {
 	const { courseId } = useParams();

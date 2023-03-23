@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from 'common';
-import { CourseCard, SearchBar } from './components';
-import { ADD_NEW_COURSE_BUTTON_TEXT, mockedCoursesList } from '../../constants';
 import { CoursesList } from 'types';
+import { mockedCoursesList, ADD_NEW_COURSE_BUTTON_TEXT } from 'constant';
+import { CourseCard, SearchBar } from './components';
 
 const Courses: React.FC = () => {
-	const [coursesList] = useState<CoursesList>(mockedCoursesList);
-	const [filteredCourses, setFilteredCourses] = useState<CoursesList>([]);
 	const navigate = useNavigate();
+	const [coursesList] = useState<CoursesList>(mockedCoursesList);
+	const [search, setSearch] = useState('');
 
-	const courses = filteredCourses.length ? filteredCourses : coursesList;
+	const courses = useMemo(
+		() =>
+			coursesList.filter(
+				(course) =>
+					course.id.toLowerCase().includes(search.toLowerCase()) ||
+					course.title.toLowerCase().includes(search.toLowerCase())
+			),
+		[coursesList, search]
+	);
 
 	return (
 		<div className='flex flex-col justify-between space-y-5 p-5'>
 			<div className='flex justify-between'>
-				<SearchBar
-					coursesList={coursesList}
-					setFilteredCourses={setFilteredCourses}
-				/>
+				<SearchBar setSearch={setSearch} />
 				<Button
 					className='btn-secondary'
 					onClick={() => navigate('/courses/add')}
@@ -27,9 +32,19 @@ const Courses: React.FC = () => {
 				/>
 			</div>
 
-			{courses.map((courseData) => (
-				<CourseCard key={courseData.id} data={courseData} />
-			))}
+			{courses.map(
+				({ id, title, description, creationDate, duration, authors }) => (
+					<CourseCard
+						key={id}
+						id={id}
+						title={title}
+						description={description}
+						creationDate={creationDate}
+						authors={authors}
+						duration={duration}
+					/>
+				)
+			)}
 		</div>
 	);
 };

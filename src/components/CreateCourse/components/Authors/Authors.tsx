@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button } from 'common';
-import { ADD_AUTHOR_BUTTON_TEXT } from '../../../../constants';
+import { ADD_AUTHOR_BUTTON_TEXT } from 'constant';
 import { Author, AuthorsList } from 'types';
 
 interface Props {

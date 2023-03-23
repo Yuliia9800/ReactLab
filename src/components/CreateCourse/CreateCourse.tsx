@@ -12,7 +12,7 @@ import {
 	mockedCoursesList,
 	TITLE_INPUT_LABEL,
 	TITLE_INPUT_PLACEHOLDER,
-} from '../../constants';
+} from 'constant';
 
 const CreateCourse: React.FC = () => {
 	const navigate = useNavigate();

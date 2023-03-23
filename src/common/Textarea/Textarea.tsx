@@ -3,23 +3,21 @@ import clsx from 'clsx';
 
 interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
 	placeholderText: string;
-	labelText?: string;
+	labelText: string;
 	className?: string;
 }
 
 const Textarea: React.FC<Props> = ({
 	placeholderText,
 	onChange,
-	labelText = '',
+	labelText,
 	className = '',
 }) => {
 	return (
 		<div className='form-control w-full'>
-			{labelText ? (
-				<label className='label'>
-					<span className='label-text'>{labelText}</span>
-				</label>
-			) : null}
+			<label className='label'>
+				<span className='label-text'>{labelText}</span>
+			</label>
 
 			<textarea
 				placeholder={placeholderText}

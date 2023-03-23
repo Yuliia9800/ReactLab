@@ -4,15 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from 'common';
 import { pipeDuration, dateGenerator, getAuthorsNames } from 'helpers';
 import { Course } from 'types';
-import { SHOW_COURSE_BUTTON_TEXT } from '../../../../constants';
+import { SHOW_COURSE_BUTTON_TEXT } from 'constant';
 
-interface Props {
-	data: Course;
-}
+interface Props extends Course {}
 
-const CourseCard: React.FC<Props> = ({ data }) => {
+const CourseCard: React.FC<Props> = ({
+	id,
+	title,
+	description,
+	authors,
+	duration,
+	creationDate,
+}) => {
 	const navigate = useNavigate();
-	const { id, title, description, authors, duration, creationDate } = data;
 
 	const handleButtonClick = () => {
 		navigate(`/courses/${id}`);

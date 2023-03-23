@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button } from 'common';
 import { AuthorsList, Author } from 'types';
-import { DELETE_AUTHOR_BUTTON_TEXT } from '../../../../constants';
+import { DELETE_AUTHOR_BUTTON_TEXT } from 'constant';
 
 interface Props {
 	authors: AuthorsList;

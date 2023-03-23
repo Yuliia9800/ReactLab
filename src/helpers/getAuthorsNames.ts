@@ -1,4 +1,4 @@
-import { mockedAuthorsList } from '../constants';
+import { mockedAuthorsList } from 'constant';
 
 const getAuthorName = (authorId: string) =>
 	mockedAuthorsList.find(({ id }) => id === authorId)?.name;

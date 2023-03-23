@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { Button } from 'common';
-import { LOGOUT_BUTTON_TEXT } from '../../constants';
+import { LOGOUT_BUTTON_TEXT } from 'constant';
 import Logo from './components/Logo/Logo';
 
 function Header() {

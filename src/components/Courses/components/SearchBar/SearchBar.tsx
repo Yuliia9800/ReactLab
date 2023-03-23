@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 
 import { Input, Button } from 'common';
-import { CoursesList } from 'types';
-import {
-	SEARCH_BUTTON_TEXT,
-	SEARCH_INPUT_PLACEHOLDER,
-} from '../../../../constants';
+import { SEARCH_BUTTON_TEXT, SEARCH_INPUT_PLACEHOLDER } from 'constant';
 
 interface Props {
-	coursesList: CoursesList;
-	setFilteredCourses: (value: CoursesList) => void;
+	setSearch: (value: string) => void;
 }
 
-const SearchBar: React.FC<Props> = ({ setFilteredCourses, coursesList }) => {
+const SearchBar: React.FC<Props> = ({ setSearch }) => {
 	const [inputValue, setInputValue] = useState('');
 
 	const handleInputChange = (event) => {
@@ -20,13 +15,7 @@ const SearchBar: React.FC<Props> = ({ setFilteredCourses, coursesList }) => {
 	};
 
 	const handleButtonClick = () => {
-		const filteredCourses = coursesList.filter(
-			(course) =>
-				course.id.toLowerCase().includes(inputValue.toLowerCase()) ||
-				course.title.toLowerCase().includes(inputValue.toLowerCase())
-		);
-
-		setFilteredCourses(filteredCourses);
+		setSearch(inputValue);
 	};
 
 	return (

@@ -7,7 +7,7 @@ import {
 	AUTHOR_NAME_INPUT_LABEL,
 	AUTHOR_NAME_INPUT_PLACEHOLDER,
 	mockedAuthorsList,
-} from '../../../../constants';
+} from 'constant';
 
 interface Props {
 	createAuthor: (event: any) => void;

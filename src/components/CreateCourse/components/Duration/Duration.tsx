@@ -2,10 +2,7 @@ import React from 'react';
 
 import { Input } from 'common';
 import { pipeDuration } from 'helpers';
-import {
-	DURATION_INPUT_LABEL,
-	DURATION_INPUT_PLACEHOLDER,
-} from '../../../../constants';
+import { DURATION_INPUT_LABEL, DURATION_INPUT_PLACEHOLDER } from 'constant';
 
 interface Props {
 	durationValue: number;
