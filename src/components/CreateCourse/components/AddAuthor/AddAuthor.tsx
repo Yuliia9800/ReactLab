@@ -6,7 +6,6 @@ import {
 	ADD_AUTHOR_BUTTON_TEXT,
 	AUTHOR_NAME_INPUT_LABEL,
 	AUTHOR_NAME_INPUT_PLACEHOLDER,
-	mockedAuthorsList,
 } from 'constant';
 
 interface AddAuthorProps {
@@ -23,9 +22,7 @@ function AddAuthor({ createAuthor }: AddAuthorProps) {
 
 		const author = { id: uuidv4(), name: authorName };
 
-		mockedAuthorsList.push(author);
-		createAuthor((prev) => [...prev, author]);
-
+		createAuthor(author);
 		setAuthorName('');
 	};
 

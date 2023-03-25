@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-	buttonText: string;
+	buttonText: string | JSX.Element;
 }
 
 function Button({ className, onClick, buttonText, ...rest }: ButtonProps) {

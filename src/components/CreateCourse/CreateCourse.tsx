@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from 'react-redux';
 
 import { Button, Input, Textarea } from 'common';
 import { AddAuthor, Duration, Authors, CourseAuthor } from './components';
@@ -8,19 +9,28 @@ import {
 	CREATE_COURSE_BUTTON_TEXT,
 	DESCRIPTION_INPUT_LABEL,
 	DESCRIPTION_INPUT_PLACEHOLDER,
-	mockedAuthorsList,
-	mockedCoursesList,
 	TITLE_INPUT_LABEL,
 	TITLE_INPUT_PLACEHOLDER,
 } from 'constant';
+import { addCourse } from 'store/courses/coursesSlice';
+import { Author } from 'types';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+import { addAuthor } from 'store/authors/authorsSlice';
 
 function CreateCourse() {
 	const navigate = useNavigate();
-	const [authors, setAuthors] = useState(mockedAuthorsList);
+	const dispatch = useDispatch();
+	const authors = useSelector((state: RootState) => state.authors);
 	const [courseAuthors, setCourseAuthors] = useState([]);
 	const [titleValue, setTitleValue] = useState('');
 	const [descriptionValue, setDescriptionValue] = useState('');
 	const [durationValue, setDurationValue] = useState(0);
+
+	const availableAuthors = useMemo(
+		() => authors.filter((author) => !courseAuthors.includes(author)),
+		[authors, courseAuthors]
+	);
 
 	const handleTitleChange = (event) => {
 		setTitleValue(event.target.value);
@@ -34,13 +44,15 @@ function CreateCourse() {
 		setDurationValue(event.target.value);
 	};
 
-	const handleAddAuthor = (author) => {
-		setCourseAuthors((prev) => [...prev, author]);
-		setAuthors((prev) => prev.filter((el) => el.id !== author.id));
+	const handleCreateAuthor = (author: Author) => {
+		dispatch(addAuthor(author));
 	};
 
-	const handleDeleteAuthor = (author) => {
-		setAuthors((prev) => [...prev, author]);
+	const handleAddAuthorToCourse = (author) => {
+		setCourseAuthors((prev) => [...prev, author]);
+	};
+
+	const handleDeleteAuthorFromCourse = (author) => {
 		setCourseAuthors((prev) => prev.filter((el) => el.id !== author.id));
 	};
 
@@ -64,12 +76,12 @@ function CreateCourse() {
 			id: uuidv4(),
 			title: titleValue,
 			description: descriptionValue,
-			creationDate: new Date(),
+			creationDate: new Date().toString(),
 			duration: durationValue,
 			authors: courseAuthors.map(({ id }) => id),
 		};
 
-		mockedCoursesList.push(newCourse);
+		dispatch(addCourse(newCourse));
 		navigate('/courses');
 	};
 
@@ -99,7 +111,7 @@ function CreateCourse() {
 
 				<div className='flex gap-16 p-5 '>
 					<div className='flex-1 space-y-8 '>
-						<AddAuthor createAuthor={setAuthors} />
+						<AddAuthor createAuthor={handleCreateAuthor} />
 						<Duration
 							durationValue={durationValue}
 							handleDurationChange={handleDurationChange}
@@ -107,10 +119,13 @@ function CreateCourse() {
 					</div>
 
 					<div className='flex-1 space-y-8'>
-						<Authors authors={authors} onClick={handleAddAuthor} />
+						<Authors
+							authors={availableAuthors}
+							onClick={handleAddAuthorToCourse}
+						/>
 						<CourseAuthor
 							authors={courseAuthors}
-							onClick={handleDeleteAuthor}
+							onClick={handleDeleteAuthorFromCourse}
 						/>
 					</div>
 				</div>

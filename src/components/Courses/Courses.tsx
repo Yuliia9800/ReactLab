@@ -1,14 +1,15 @@
 import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { Button } from 'common';
-import { CoursesList } from 'types';
-import { mockedCoursesList, ADD_NEW_COURSE_BUTTON_TEXT } from 'constant';
+import { ADD_NEW_COURSE_BUTTON_TEXT } from 'constant';
 import { CourseCard, SearchBar } from './components';
+import { RootState } from 'store';
 
 function Courses() {
 	const navigate = useNavigate();
-	const [coursesList] = useState<CoursesList>(mockedCoursesList);
+	const coursesList = useSelector((state: RootState) => state.courses);
 	const [search, setSearch] = useState('');
 
 	const courses = useMemo(

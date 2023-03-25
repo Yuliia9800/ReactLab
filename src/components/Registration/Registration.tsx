@@ -2,10 +2,11 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Button, Input } from 'common';
-import { api } from 'helpers';
+import { userRegistration } from 'services';
 
 function Registration() {
 	const navigate = useNavigate();
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const { email, name, password } = e.target.elements;
@@ -16,8 +17,7 @@ function Registration() {
 			password: password.value,
 		};
 
-		api
-			.post('register', user)
+		userRegistration(user)
 			.then((response) => {
 				console.log(response);
 				navigate('/login');

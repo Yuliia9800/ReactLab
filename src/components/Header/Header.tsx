@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { Button } from 'common';
 import { LOGOUT_BUTTON_TEXT } from 'constant';
 import Logo from './components/Logo/Logo';
+import { logout } from 'store/user/userSlice';
+import { RootState } from 'store';
 
 function Header() {
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [token, setToken] = useState(null);
+	const name = useSelector((state: RootState) => state.user.name);
 
 	useEffect(() => {
 		const token = localStorage.getItem('token');
@@ -17,6 +22,7 @@ function Header() {
 	}, [location]);
 
 	const handleButtonClick = () => {
+		dispatch(logout());
 		localStorage.removeItem('token');
 		navigate('/login');
 	};
@@ -30,7 +36,7 @@ function Header() {
 				<div className='flex-none gap-6'>
 					{token ? (
 						<>
-							<p className='font-bold'>Yuliia</p>
+							<p className='font-bold'>{name}</p>
 							<Button
 								buttonText={LOGOUT_BUTTON_TEXT}
 								className='btn-ghost'
