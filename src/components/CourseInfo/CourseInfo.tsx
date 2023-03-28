@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
-import { dateGenerator, getAuthorsNames, pipeDuration } from 'helpers';
-import { mockedCoursesList } from 'constant';
+import { dateGenerator, pipeDuration } from 'helpers';
+import { RootState } from 'store';
 
 function CourseInfo() {
 	const { courseId } = useParams();
+	const coursesList = useSelector((state: RootState) => state.courses);
+	const authorsList = useSelector((state: RootState) => state.authors);
 
-	const course = mockedCoursesList.find((course) => course.id === courseId);
+	const course = useMemo(
+		() => coursesList.find((course) => course.id === courseId),
+		[courseId, coursesList]
+	);
+
+	const courseAuthors = course?.authors.map(
+		(authorId) => authorsList?.find(({ id }) => id === authorId)?.name
+	);
 
 	if (!course) {
 		return <div className='mt-10 text-center'>This course doesn't exist</div>;
@@ -40,7 +50,7 @@ function CourseInfo() {
 						</p>
 						<p className='truncate text-sm'>
 							<b>Author: </b>
-							{getAuthorsNames(course.authors).join(', ')}
+							{courseAuthors.join(', ')}
 						</p>
 					</div>
 				</div>
