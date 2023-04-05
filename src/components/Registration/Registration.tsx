@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Button, Input } from 'common';
-import { userRegistration } from 'services';
+import { registrationAPI } from 'services';
 
 function Registration() {
 	const navigate = useNavigate();
@@ -17,14 +17,8 @@ function Registration() {
 			password: password.value,
 		};
 
-		userRegistration(user)
-			.then((response) => {
-				console.log(response);
-				navigate('/login');
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+		registrationAPI(user);
+		navigate('/login');
 	};
 
 	return (

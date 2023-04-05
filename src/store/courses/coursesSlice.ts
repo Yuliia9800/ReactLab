@@ -1,27 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { CoursesList, Course } from 'types';
+import { CoursesList } from 'types';
+import {
+	getCourses,
+	deleteCourse,
+	addCourse,
+	updateCourse,
+} from './coursesThunk';
 
 const initialState: CoursesList = [];
 
 export const coursesSlice = createSlice({
 	name: 'courses',
 	initialState,
-	reducers: {
-		getCourses: (state, action: PayloadAction<CoursesList>) => {
-			state.push(...action.payload);
-		},
-		addCourse: (state, action: PayloadAction<Course>) => {
+	reducers: {},
+	extraReducers: (builder) => {
+		builder.addCase(getCourses.fulfilled, (state, action) => {
+			return (state = action.payload);
+		});
+
+		builder.addCase(addCourse.fulfilled, (state, action) => {
 			state.push(action.payload);
-		},
-		updateCourse: (state, action: PayloadAction<string>) => {},
-		deleteCourse: (state, action: PayloadAction<string>) => {
+		});
+		builder.addCase(updateCourse.fulfilled, (state, action) => {
+			const index = state.findIndex(({ id }) => id === action.payload.id);
+
+			state[index] = action.payload;
+		});
+
+		builder.addCase(deleteCourse.fulfilled, (state, action) => {
 			return state.filter((course) => course.id !== action.payload);
-		},
+		});
 	},
 });
-
-export const { getCourses, addCourse, deleteCourse } = coursesSlice.actions;
 
 export default coursesSlice.reducer;

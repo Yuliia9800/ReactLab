@@ -1,36 +1,54 @@
-import React, { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { useDispatch } from 'react-redux';
 
 import { Button, Input, Textarea } from 'common';
-import { AddAuthor, Duration, Authors, CourseAuthor } from './components';
 import {
 	CREATE_COURSE_BUTTON_TEXT,
 	DESCRIPTION_INPUT_LABEL,
 	DESCRIPTION_INPUT_PLACEHOLDER,
 	TITLE_INPUT_LABEL,
 	TITLE_INPUT_PLACEHOLDER,
+	UPDATE_COURSE_BUTTON_TEXT,
 } from 'constant';
-import { addCourse } from 'store/courses/coursesSlice';
+import { addCourse, updateCourse } from 'store/courses';
 import { Author } from 'types';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store';
-import { addAuthor } from 'store/authors/authorsSlice';
+import { AppDispatch, RootState } from 'store';
+import { addAuthor } from 'store/authors';
+import { AddAuthor, Duration, Authors, CourseAuthor } from './components';
 
-function CreateCourse() {
+function CourseForm() {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
+	const { courseId } = useParams();
+
+	const courses = useSelector((state: RootState) => state.courses);
+	const courseInfo = courses.find((course) => course.id === courseId);
 	const authors = useSelector((state: RootState) => state.authors);
-	const [courseAuthors, setCourseAuthors] = useState([]);
+
+	const [courseAuthorIds, setCourseAuthorIds] = useState([]);
 	const [titleValue, setTitleValue] = useState('');
 	const [descriptionValue, setDescriptionValue] = useState('');
 	const [durationValue, setDurationValue] = useState(0);
-
 	const availableAuthors = useMemo(
-		() => authors.filter((author) => !courseAuthors.includes(author)),
-		[authors, courseAuthors]
+		() => authors.filter((author) => !courseAuthorIds.includes(author.id)),
+		[authors, courseAuthorIds]
 	);
+
+	const courseAuthors = useMemo(
+		() => authors.filter((author) => courseAuthorIds.includes(author.id)),
+		[authors, courseAuthorIds]
+	);
+
+	useEffect(() => {
+		if (courseId && courseInfo) {
+			setTitleValue(courseInfo.title);
+			setCourseAuthorIds(courseInfo.authors);
+			setDescriptionValue(courseInfo.description);
+			setDurationValue(courseInfo.duration);
+		}
+	}, [courseId, courseInfo, authors]);
 
 	const handleTitleChange = (event) => {
 		setTitleValue(event.target.value);
@@ -49,11 +67,11 @@ function CreateCourse() {
 	};
 
 	const handleAddAuthorToCourse = (author) => {
-		setCourseAuthors((prev) => [...prev, author]);
+		setCourseAuthorIds((prev) => [...prev, author.id]);
 	};
 
 	const handleDeleteAuthorFromCourse = (author) => {
-		setCourseAuthors((prev) => prev.filter((el) => el.id !== author.id));
+		setCourseAuthorIds((prev) => prev.filter((id) => id !== author.id));
 	};
 
 	const handleCreate = () => {
@@ -65,7 +83,7 @@ function CreateCourse() {
 		if (
 			!titleValue ||
 			!descriptionValue ||
-			!courseAuthors.length ||
+			!setCourseAuthorIds.length ||
 			!durationValue
 		) {
 			alert('Please, fill in all fields');
@@ -73,15 +91,17 @@ function CreateCourse() {
 		}
 
 		const newCourse = {
-			id: uuidv4(),
+			id: courseInfo?.id || uuidv4(),
 			title: titleValue,
 			description: descriptionValue,
 			creationDate: new Date().toString(),
-			duration: durationValue,
-			authors: courseAuthors.map(({ id }) => id),
+			duration: Number(durationValue),
+			authors: courseAuthorIds,
 		};
 
-		dispatch(addCourse(newCourse));
+		courseId
+			? dispatch(updateCourse(newCourse))
+			: dispatch(addCourse(newCourse));
 		navigate('/courses');
 	};
 
@@ -96,14 +116,18 @@ function CreateCourse() {
 						value={titleValue}
 						onChange={handleTitleChange}
 					/>
+
 					<Button
-						buttonText={CREATE_COURSE_BUTTON_TEXT}
+						buttonText={
+							courseId ? UPDATE_COURSE_BUTTON_TEXT : CREATE_COURSE_BUTTON_TEXT
+						}
 						className='btn-secondary self-end'
 						onClick={handleCreate}
 					/>
 				</div>
 
 				<Textarea
+					value={descriptionValue}
 					labelText={DESCRIPTION_INPUT_LABEL}
 					onChange={handleDescriptionChange}
 					placeholderText={DESCRIPTION_INPUT_PLACEHOLDER}
@@ -134,4 +158,4 @@ function CreateCourse() {
 	);
 }
 
-export default CreateCourse;
+export default CourseForm;

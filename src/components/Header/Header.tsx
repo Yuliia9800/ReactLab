@@ -4,12 +4,12 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { Button } from 'common';
 import { LOGOUT_BUTTON_TEXT } from 'constant';
+import { logout } from 'store/user';
+import { AppDispatch, RootState } from 'store';
 import Logo from './components/Logo/Logo';
-import { logout } from 'store/user/userSlice';
-import { RootState } from 'store';
 
 function Header() {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [token, setToken] = useState(null);
@@ -23,7 +23,6 @@ function Header() {
 
 	const handleButtonClick = () => {
 		dispatch(logout());
-		localStorage.removeItem('token');
 		navigate('/login');
 	};
 

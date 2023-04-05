@@ -7,8 +7,8 @@ import { Button } from 'common';
 import { pipeDuration, dateGenerator } from 'helpers';
 import { Course } from 'types';
 import { SHOW_COURSE_BUTTON_TEXT } from 'constant';
-import { deleteCourse } from 'store/courses/coursesSlice';
-import { RootState } from 'store';
+import { deleteCourse } from 'store/courses';
+import { AppDispatch, RootState } from 'store';
 
 interface CourseCardProps extends Course {}
 
@@ -21,8 +21,9 @@ function CourseCard({
 	creationDate,
 }: CourseCardProps) {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	const authorsList = useSelector((state: RootState) => state.authors);
+	const role = useSelector((state: RootState) => state.user.role);
 
 	const handleShowCourse = () => {
 		navigate(`/courses/${id}`);
@@ -32,7 +33,10 @@ function CourseCard({
 		(authorId) => authorsList?.find(({ id }) => id === authorId)?.name
 	);
 
-	const handleEdit = () => {};
+	const handleEdit = () => {
+		navigate(`/courses/update/${id}`);
+	};
+
 	const handleDelete = () => {
 		dispatch(deleteCourse(id));
 	};
@@ -65,18 +69,21 @@ function CourseCard({
 						onClick={handleShowCourse}
 						className=''
 					/>
-					<div className='space-x-2'>
-						<Button
-							buttonText={<BsPencil />}
-							onClick={handleEdit}
-							className='text-xl'
-						/>
-						<Button
-							buttonText={<BsTrash />}
-							onClick={handleDelete}
-							className='text-xl '
-						/>
-					</div>
+
+					{role === 'admin' ? (
+						<div className='space-x-2'>
+							<Button
+								buttonText={<BsPencil />}
+								onClick={handleEdit}
+								className='text-xl'
+							/>
+							<Button
+								buttonText={<BsTrash />}
+								onClick={handleDelete}
+								className='text-xl '
+							/>
+						</div>
+					) : null}
 				</div>
 			</div>
 		</div>

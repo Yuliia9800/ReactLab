@@ -11,6 +11,7 @@ interface TextareaProps
 function Textarea({
 	placeholderText,
 	onChange,
+	value,
 	labelText,
 	className = '',
 }: TextareaProps) {
@@ -21,6 +22,7 @@ function Textarea({
 			</label>
 
 			<textarea
+				value={value}
 				placeholder={placeholderText}
 				className={clsx('textarea-primary textarea p-5', className)}
 				onChange={onChange}
