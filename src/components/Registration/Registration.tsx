@@ -1,10 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Button, Input } from 'common';
-import { userRegistration } from 'services';
+import { AppDispatch } from 'store';
+import { registration } from 'store/user';
 
 function Registration() {
+	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
 
 	const handleSubmit = (e) => {
@@ -17,13 +20,10 @@ function Registration() {
 			password: password.value,
 		};
 
-		userRegistration(user)
-			.then((response) => {
-				console.log(response);
+		dispatch(registration(user))
+			.unwrap()
+			.then(() => {
 				navigate('/login');
-			})
-			.catch((error) => {
-				console.error(error);
 			});
 	};
 

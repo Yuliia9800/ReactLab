@@ -5,34 +5,17 @@ import {
 	Header,
 	CourseInfo,
 	Courses,
-	CreateCourse,
+	CourseForm,
 	Login,
 	Registration,
+	PrivateRoute,
 } from 'components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from 'store';
-import { getCourses } from 'store/courses/coursesSlice';
-import { getAuthors } from 'store/authors/authorsSlice';
-import { getAllAuthors, getAllCourses } from 'services';
 
 function App() {
-	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const token = useSelector((state: RootState) => state.user.token);
-
-	useEffect(() => {
-		getAllCourses().then((response) => {
-			console.log(response);
-
-			dispatch(getCourses(response.data.result));
-		});
-
-		getAllAuthors().then((response) => {
-			console.log(response);
-
-			dispatch(getAuthors(response.data.result));
-		});
-	}, [dispatch]);
 
 	useEffect(() => {
 		if (token) {
@@ -52,7 +35,24 @@ function App() {
 					<Route path='/registration' element={<Registration />} />
 					<Route path='/courses'>
 						<Route index element={<Courses />} />
-						<Route path='/courses/add' element={<CreateCourse />} />
+
+						<Route
+							path='/courses/add'
+							element={
+								<PrivateRoute>
+									<CourseForm />
+								</PrivateRoute>
+							}
+						/>
+
+						<Route
+							path='/courses/update/:courseId'
+							element={
+								<PrivateRoute>
+									<CourseForm />
+								</PrivateRoute>
+							}
+						/>
 						<Route path='/courses/:courseId' element={<CourseInfo />} />
 					</Route>
 				</Route>

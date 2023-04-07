@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Button, Input } from 'common';
-import { login } from 'store/user/userSlice';
-import { userLogin } from 'services';
+import { login } from 'store/user';
+import { AppDispatch } from 'store';
 
 function Login() {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
 
 	const handleSubmit = (e) => {
@@ -19,21 +19,10 @@ function Login() {
 			password: password.value,
 		};
 
-		userLogin(user)
-			.then((response) => {
-				console.log(response);
-				dispatch(
-					login({
-						name: response.data.user.name,
-						email: response.data.user.email,
-						token: response.data.result,
-					})
-				);
-				localStorage.setItem('token', JSON.stringify(response.data.result));
+		dispatch(login(user))
+			.unwrap()
+			.then(() => {
 				navigate('/courses');
-			})
-			.catch((error) => {
-				console.error(error);
 			});
 	};
 
