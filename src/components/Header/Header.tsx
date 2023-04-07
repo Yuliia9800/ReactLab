@@ -22,8 +22,11 @@ function Header() {
 	}, [location]);
 
 	const handleButtonClick = () => {
-		dispatch(logout());
-		navigate('/login');
+		dispatch(logout())
+			.unwrap()
+			.then(() => {
+				navigate('/login');
+			});
 	};
 
 	return (

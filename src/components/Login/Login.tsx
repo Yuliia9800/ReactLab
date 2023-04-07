@@ -19,8 +19,11 @@ function Login() {
 			password: password.value,
 		};
 
-		dispatch(login(user));
-		navigate('/courses');
+		dispatch(login(user))
+			.unwrap()
+			.then(() => {
+				navigate('/courses');
+			});
 	};
 
 	return (

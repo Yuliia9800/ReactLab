@@ -1,7 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { loginAPI, logoutAPI, getUserAPI } from 'services';
+import { loginAPI, logoutAPI, getUserAPI, registrationAPI } from 'services';
 import { UserState } from './userSlice';
+
+export const registration = createAsyncThunk<
+	void,
+	{ email: string; name: string; password: string }
+>('user/registration', async ({ email, name, password }) => {
+	await registrationAPI({ email, name, password });
+});
 
 export const login = createAsyncThunk<
 	Omit<UserState, 'isAuth'>,
@@ -19,12 +26,10 @@ export const login = createAsyncThunk<
 	};
 });
 
-export const logout = createAsyncThunk('user/logout', async () => {
-	localStorage.removeItem('token');
-
+export const logout = createAsyncThunk<void>('user/logout', async () => {
 	await logoutAPI();
 
-	return null;
+	localStorage.removeItem('token');
 });
 
 export const getUser = createAsyncThunk<Omit<UserState, 'token' | 'isAuth'>>(
