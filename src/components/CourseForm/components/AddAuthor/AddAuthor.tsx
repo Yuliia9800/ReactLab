@@ -40,6 +40,7 @@ function AddAuthor({ createAuthor }: AddAuthorProps) {
 				className='btn-outline self-center'
 				buttonText={ADD_AUTHOR_BUTTON_TEXT}
 				onClick={handleCreateAuthor}
+				data-testid='createAuthor'
 			/>
 		</div>
 	);

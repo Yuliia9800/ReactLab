@@ -22,6 +22,7 @@ export const coursesSlice = createSlice({
 		builder.addCase(addCourse.fulfilled, (state, action) => {
 			state.push(action.payload);
 		});
+
 		builder.addCase(updateCourse.fulfilled, (state, action) => {
 			const index = state.findIndex(({ id }) => id === action.payload.id);
 

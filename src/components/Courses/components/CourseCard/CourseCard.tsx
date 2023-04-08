@@ -42,7 +42,10 @@ function CourseCard({
 	};
 
 	return (
-		<div className='card flex min-h-[200px] flex-row justify-between gap-10 bg-base-200 p-5 shadow-xl'>
+		<div
+			className='card flex min-h-[200px] flex-row justify-between gap-10 bg-base-200 p-5 shadow-xl'
+			data-testid='course'
+		>
 			<div className='w-4/6 space-y-2'>
 				<h1 className='text-2xl font-bold'>{title}</h1>
 				<p className='text-sm'>{description}</p>

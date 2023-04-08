@@ -10,7 +10,7 @@ export interface UserState {
 	role: string;
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
 	isAuth: false,
 	name: '',
 	email: '',
