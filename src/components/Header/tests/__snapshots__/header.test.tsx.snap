@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot 1`] = `
+<div>
+  <div
+    class="primary-content navbar px-5"
+  >
+    <div
+      class="flex-1"
+    >
+      <a
+        href="/courses"
+      >
+        <img
+          alt="logo"
+          class="w-40"
+          src="logo.webp"
+        />
+      </a>
+    </div>
+    <div
+      class="flex-none gap-6"
+    >
+      <p
+        class="font-bold"
+      >
+        Yuliia
+      </p>
+      <button
+        class="btn-sm btn px-5 btn-ghost"
+        type="button"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+</div>
+`;

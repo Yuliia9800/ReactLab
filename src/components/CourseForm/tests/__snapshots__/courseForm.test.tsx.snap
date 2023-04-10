@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot 1`] = `
+<div>
+  <div
+    class="m-5 flex flex-col justify-between space-y-5 p-5 shadow-xl"
+  >
+    <div
+      class="flex justify-between"
+    >
+      <div
+        class="form-control w-full"
+      >
+        <label
+          class="label text-xs font-medium text-gray-700"
+        >
+          <span
+            class="label-text"
+          >
+            Title
+          </span>
+        </label>
+        <input
+          class="input-primary input input-md input-sm max-w-sm"
+          placeholder="Enter title..."
+          type="text"
+          value=""
+        />
+      </div>
+      <button
+        class="btn-sm btn px-5 btn-secondary self-end"
+        type="button"
+      >
+        Create course
+      </button>
+    </div>
+    <div
+      class="form-control w-full"
+    >
+      <label
+        class="label"
+      >
+        <span
+          class="label-text"
+        >
+          Description
+        </span>
+      </label>
+      <textarea
+        class="textarea-primary textarea p-5"
+        placeholder="Enter description..."
+      />
+    </div>
+    <div
+      class="flex gap-16 p-5 "
+    >
+      <div
+        class="flex-1 space-y-8 "
+      >
+        <div
+          class="flex flex-col space-y-4 "
+        >
+          <h3
+            class="self-center font-semibold"
+          >
+            Add author
+          </h3>
+          <div
+            class="form-control w-full"
+          >
+            <label
+              class="label text-xs font-medium text-gray-700"
+            >
+              <span
+                class="label-text"
+              >
+                Add author name
+              </span>
+            </label>
+            <input
+              class="input-primary input input-md input-sm w-full"
+              placeholder="Enter author name..."
+              type="text"
+              value=""
+            />
+          </div>
+          <button
+            class="btn-sm btn px-5 btn-outline self-center"
+            data-testid="createAuthor"
+            type="button"
+          >
+            Add Author
+          </button>
+        </div>
+        <div
+          class="flex flex-col space-y-2"
+        >
+          <h3
+            class="self-center font-semibold"
+          >
+            Duration
+          </h3>
+          <div
+            class="form-control w-full"
+          >
+            <label
+              class="label text-xs font-medium text-gray-700"
+            >
+              <span
+                class="label-text"
+              >
+                Duration
+              </span>
+            </label>
+            <input
+              class="input-primary input input-md input-sm w-full"
+              min="0"
+              placeholder="Enter duration in minutes..."
+              type="number"
+              value="0"
+            />
+          </div>
+          <h4
+            class="text-lg font-light"
+          >
+            Duration:
+            <b
+              class="text-xl font-bold"
+            >
+               
+              00:00
+               
+            </b>
+            hours
+          </h4>
+        </div>
+      </div>
+      <div
+        class="flex-1 space-y-8"
+      >
+        <div
+          class="flex flex-col justify-end space-y-4"
+        >
+          <h3
+            class="self-center font-semibold"
+          >
+            Authors
+          </h3>
+        </div>
+        <div
+          class="flex flex-col justify-end space-y-4"
+        >
+          <h3
+            class="self-center font-semibold"
+          >
+            Course authors
+          </h3>
+          <p
+            class="self-center text-sm font-light"
+          >
+            Author list is empty
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
