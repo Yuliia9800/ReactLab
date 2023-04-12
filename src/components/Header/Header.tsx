@@ -11,15 +11,8 @@ import Logo from './components/Logo/Logo';
 function Header() {
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
-	const location = useLocation();
-	const [token, setToken] = useState(null);
+	const token = useSelector((state: RootState) => state.user.token);
 	const name = useSelector((state: RootState) => state.user.name);
-
-	useEffect(() => {
-		const token = localStorage.getItem('token');
-
-		setToken(token);
-	}, [location]);
 
 	const handleButtonClick = () => {
 		dispatch(logout())

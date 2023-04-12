@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot 1`] = `
+<div>
+  <div
+    class="flex flex-col justify-between space-y-5 p-5"
+  >
+    <div
+      class="flex justify-between"
+    >
+      <div
+        class="flex space-x-3"
+      >
+        <div
+          class="form-control w-full"
+        >
+          <input
+            class="input-primary input input-md input-sm w-72"
+            placeholder="Enter course name or id..."
+            type="text"
+            value=""
+          />
+        </div>
+        <button
+          class="btn-sm btn px-5"
+          type="button"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+    <div
+      class="card flex min-h-[200px] flex-row justify-between gap-10 bg-base-200 p-5 shadow-xl"
+      data-testid="course"
+    >
+      <div
+        class="w-4/6 space-y-2"
+      >
+        <h1
+          class="text-2xl font-bold"
+        >
+          title1
+        </h1>
+        <p
+          class="text-sm"
+        >
+          description1
+        </p>
+      </div>
+      <div
+        class="flex w-2/6 min-w-[300px] flex-col justify-between space-y-2"
+      >
+        <div
+          class="space-y-2"
+        >
+          <p
+            class="truncate text-sm"
+          >
+            <b>
+              Author: 
+            </b>
+          </p>
+          <p
+            class="text-sm"
+          >
+            <b>
+              Duration: 
+            </b>
+            01:10
+             hours
+          </p>
+          <p
+            class="text-sm"
+          >
+            <b>
+              Created: 
+            </b>
+            10.10.2022
+          </p>
+        </div>
+        <div
+          class="flex flex-wrap justify-between "
+        >
+          <button
+            class="btn-sm btn px-5"
+            type="button"
+          >
+            Show Course
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="card flex min-h-[200px] flex-row justify-between gap-10 bg-base-200 p-5 shadow-xl"
+      data-testid="course"
+    >
+      <div
+        class="w-4/6 space-y-2"
+      >
+        <h1
+          class="text-2xl font-bold"
+        >
+          title3
+        </h1>
+        <p
+          class="text-sm"
+        >
+          description3
+        </p>
+      </div>
+      <div
+        class="flex w-2/6 min-w-[300px] flex-col justify-between space-y-2"
+      >
+        <div
+          class="space-y-2"
+        >
+          <p
+            class="truncate text-sm"
+          >
+            <b>
+              Author: 
+            </b>
+          </p>
+          <p
+            class="text-sm"
+          >
+            <b>
+              Duration: 
+            </b>
+            01:10
+             hours
+          </p>
+          <p
+            class="text-sm"
+          >
+            <b>
+              Created: 
+            </b>
+            10.10.2022
+          </p>
+        </div>
+        <div
+          class="flex flex-wrap justify-between "
+        >
+          <button
+            class="btn-sm btn px-5"
+            type="button"
+          >
+            Show Course
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
